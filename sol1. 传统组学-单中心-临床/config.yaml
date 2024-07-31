@@ -1,0 +1,11 @@
+# ----------------------------------------------------------------------- #
+#                                                                         #
+#                               YMAL文件语法                               #
+#                       http://medai.icu/thread/677                       #
+#                                                                         #
+# ----------------------------------------------------------------------- #
+radio_dir: ONEKEYDS_HOME/CT
+task_column: label
+clinic_file: ONEKEYDS_HOME/survival.csv
+sel_model: LR
+font.size: 12

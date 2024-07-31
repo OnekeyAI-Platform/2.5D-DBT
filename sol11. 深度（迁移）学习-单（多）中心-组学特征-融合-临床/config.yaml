@@ -1,0 +1,67 @@
+# ----------------------------------------------------------------------- #
+#                                                                         #
+#                               YMAL文件语法                               #
+#                       http://medai.icu/thread/677                       #
+#                                                                         #
+# ----------------------------------------------------------------------- #
+
+### ------------------------ 深度学习任务配置 ------------------------ ###
+train_file: 
+val_file: 
+# 自己数据存放的目录。一般是由OKT-crop_max_ro工具生成。
+data_pattern: 
+model_name: resnet101
+model_root: dl_models
+epoch: 50
+
+### ------------------------ 传统组学任务配置 ------------------------ ###
+# 影像数据存放位置，需要确保该目录下存在images和masks文件夹。
+radio_dir: 
+task_column: label
+# label文件位置，注意这里需要是多中心的配置，包括group信息。
+label_file: split_info\label-RND-0.csv
+dataset_column: group
+
+# 特征提取的配置文件位置
+extractor_settings: 
+# 使用MRMR模型筛选特征, 不输入数据的时候，不使用mRMR，默认不使用
+mrmr_sel_feature_num: 
+ml_models:
+  - LR
+  - SVM
+  - KNN
+  - RandomForest
+  - ExtraTrees
+  - XGBoost
+  - LightGBM
+  - MLP
+
+### ------------------------ 传统组学+深度学习任务配置 ------------------------ ###
+# 使用ctl c+ ctl v拼接之后的特征文件
+combined_feature_file: 
+
+### ------------------------ 临床任务配置 ------------------------ ###
+clinic_file: 
+# 用于做临床特征筛选的pvalue
+p_value: 0.05
+
+### ------------------------ 生存汇总任务配置 ------------------------ ###
+# 带有随访数据的文件。
+survival_file: 
+event_col: event
+duration_col: duration
+
+
+### ------------------------ 生存汇总任务配置 ------------------------ ###
+# ROC、校准、DCA、Delong汇总对比的模型。
+compare_models: [Clinic, Rad, DTL, Combined]
+# 使用什么模型与临床特征进行融合，得到最终的Nomogram
+fusion_models: [Combined]
+sel_model: 
+  Clinic: LR
+  Rad: LR
+  DTL: resnet101
+  Combined: LR
+
+font.size: 12
+DISABLE_VIDEO: True
